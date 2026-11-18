@@ -1,0 +1,18 @@
+display_information:
+  name: Team Shout-outs
+  description: Post a random compliment in Slack.
+features:
+  bot_user:
+    display_name: Team Shout-outs
+  slash_commands:
+    - command: /compliment
+      description: Post a random positive message in this channel
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - chat:write
+settings:
+  socket_mode_enabled: true
+  token_rotation_enabled: false

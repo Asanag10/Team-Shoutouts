@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Team Shout-outs"
+description = "A small setup and connection status console for the Team Shout-outs Slack bot. Compliments are posted only through Slack."
+version = "1.0.0"
+id = "artifacts/team-shout-outs"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24033
+
+[services.development]
+run = "pnpm --filter @workspace/team-shout-outs run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/team-shout-outs", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/team-shout-outs/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24033"
+BASE_PATH = "/"
