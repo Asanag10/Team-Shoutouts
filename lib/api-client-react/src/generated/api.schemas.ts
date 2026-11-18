@@ -5,21 +5,6 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-export type SlackStatusStatus = typeof SlackStatusStatus[keyof typeof SlackStatusStatus];
-
-
-export const SlackStatusStatus = {
-  unconfigured: 'unconfigured',
-  connecting: 'connecting',
-  connected: 'connected',
-  disconnected: 'disconnected',
-  error: 'error',
-} as const;
-
-export interface SlackStatus {
-  status: SlackStatusStatus;
-}
-
 export interface HealthStatus {
   status: string;
 }

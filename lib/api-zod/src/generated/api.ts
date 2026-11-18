@@ -17,11 +17,3 @@ export const HealthCheckResponse = zod.object({
 })
 
 
-/**
- * @summary Get the Slack bot connection state
- */
-export const GetSlackStatusResponse = zod.object({
-  "status": zod.enum(['unconfigured', 'connecting', 'connected', 'disconnected', 'error'])
-})
-
-

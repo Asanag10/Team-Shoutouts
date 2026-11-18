@@ -16,8 +16,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  HealthStatus,
-  SlackStatus
+  HealthStatus
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -113,83 +112,6 @@ export function useHealthCheck<TData = Awaited<ReturnType<typeof healthCheck>>, 
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getHealthCheckQueryOptions(options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  return withQueryKey(query, queryOptions.queryKey);
-}
-
-
-
-
-
-
-
-export const getGetSlackStatusUrl = () => {
-
-
-
-
-  return `/api/slack/status`
-}
-
-/**
- * @summary Get the Slack bot connection state
- */
-export const getSlackStatus = async ( options?: Parameters<typeof customFetch>[1]): Promise<SlackStatus> => {
-
-  return customFetch<SlackStatus>(getGetSlackStatusUrl(),
-  {
-    ...options,
-    method: 'GET'
-
-
-  }
-);}
-
-
-
-
-
-export const getGetSlackStatusQueryKey = () => {
-    return [
-    `/api/slack/status`
-    ] as const;
-    }
-
-
-export const getGetSlackStatusQueryOptions = <TData = Awaited<ReturnType<typeof getSlackStatus>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getSlackStatus>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetSlackStatusQueryKey();
-
-
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getSlackStatus>>> = ({ signal }) => getSlackStatus({ signal, ...requestOptions });
-
-
-
-
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getSlackStatus>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type GetSlackStatusQueryResult = NonNullable<Awaited<ReturnType<typeof getSlackStatus>>>
-export type GetSlackStatusQueryError = ErrorType<unknown>
-
-
-/**
- * @summary Get the Slack bot connection state
- */
-
-export function useGetSlackStatus<TData = Awaited<ReturnType<typeof getSlackStatus>>, TError = ErrorType<unknown>>(
-  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getSlackStatus>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
-
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-
-  const queryOptions = getGetSlackStatusQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

@@ -24,26 +24,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
-  /slack/status:
-    get:
-      operationId: getSlackStatus
-      summary: Get the Slack bot connection state
-      responses:
-        "200":
-          description: Current connection state, without credentials
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SlackStatus"
 components:
   schemas:
-    SlackStatus:
-      type: object
-      required: [status]
-      properties:
-        status:
-          type: string
-          enum: [unconfigured, connecting, connected, disconnected, error]
     HealthStatus:
       type: object
       properties:
