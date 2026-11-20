@@ -1,1 +1,0 @@
-- [Slack-only product scope](slack-only.md) — Team Shout-outs is a Slack bot backend, not a setup website or web app.
